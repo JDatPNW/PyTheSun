@@ -13,7 +13,7 @@ model = dmnet(WIDTH, HEIGHT, LR)
 hm_data = 22
 for i in range(EPOCHS):
     for i in range(1, hm_data + 1):
-        train_data = np.load('training_data.npy'.format(i))
+        train_data = np.load('training_data.npy'.format(i)) #allow_pickle=True
 
         train = train_data[:-100]
         test = train_data[-100:]

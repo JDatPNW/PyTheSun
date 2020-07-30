@@ -17,7 +17,7 @@ file_name = 'training_data.npy'
 
 if os.path.isfile(file_name):
     print('File exists, loading previous data!')
-    training_data = list(np.load(file_name))
+    training_data = list(np.load(file_name, allow_pickle=True))
 else:
     print('File does not exist, starting fresh!')
     training_data = []
@@ -36,7 +36,8 @@ while(True):
         screen = np.array(sct.grab(bounding_box))
         screen = cv2.cvtColor(screen, cv2.COLOR_RGB2GRAY)
         screen = cv2.resize(screen, (200, 150))
-        screen = cv2.ellipse(screen, (100, 100), (42, 28), 0, 0, 360, (125, 125, 125), -1)
+        screen = cv2.ellipse(screen, (100, 100), (42, 28),
+                             0, 0, 360, (125, 125, 125), -1)
 
         training_data.append([screen, keys])
 
