@@ -1,14 +1,9 @@
 #my stuff
 .*
 *.png
-*.meta.*
 log
-*.model.*
-*.model
-*.index
-PyTheSun*
-*.npy
 checkpoint
+*.npy
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

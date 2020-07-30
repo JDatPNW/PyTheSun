@@ -17,21 +17,21 @@ from tflearn.layers.normalization import local_response_normalization
 
 def dmnet(width, height, lr):
     network = input_data(shape=[None, width, height, 1], name='input')
-    network = conv_2d(network, 22, 7, strides=4, activation='relu')
-    network = max_pool_2d(network, 2, strides=2)
+    network = conv_2d(network, 23, 7, strides=4, activation='relu')
+    network = max_pool_2d(network, 3, strides=2)
     network = local_response_normalization(network)
     network = conv_2d(network, 128, 5, activation='relu')
-    network = max_pool_2d(network, 2, strides=2)
+    network = max_pool_2d(network, 3, strides=2)
     network = local_response_normalization(network)
-    network = conv_2d(network, 128, 2, activation='relu')
-    network = conv_2d(network, 64, 2, activation='relu')
-    network = max_pool_2d(network, 2, strides=2)
+    network = conv_2d(network, 128, 3, activation='relu')
+    network = conv_2d(network, 64, 3, activation='relu')
+    network = max_pool_2d(network, 3, strides=2)
     network = local_response_normalization(network)
     network = fully_connected(network, 1024, activation='tanh')
     network = dropout(network, 0.5)
     network = fully_connected(network, 1024, activation='tanh')
     network = dropout(network, 0.5)
-    network = fully_connected(network, 2, activation='softmax')
+    network = fully_connected(network, 3, activation='softmax')
     network = regression(network, optimizer='momentum',
                          loss='categorical_crossentropy',
                          learning_rate=lr, name='targets')

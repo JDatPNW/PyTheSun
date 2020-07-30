@@ -10,7 +10,7 @@ bounding_box = {'top': 28, 'left': 0, 'width': 800, 'height': 600}
 last_time = time.time()
 sct = mss()
 
-frame_skip = 100
+frame_skip = 2
 frame = 0
 
 file_name = 'training_data.npy'
@@ -25,13 +25,15 @@ else:
 while(True):
     frame = frame + 1
     if(frame % frame_skip == 0):
-        keys = [0, 0]
+        keys = [0, 0, 0]
         if(keyboard.is_pressed('a')):
             keys[0] = 1
-        if(keyboard.is_pressed('d')):
+        elif(keyboard.is_pressed('d')):
             keys[1] = 1
-        if(keyboard.is_pressed('q')):
+        elif(keyboard.is_pressed('q')):
             break
+        if(keys[0] == keys[1]):
+            keys[2] == 1
 
         screen = np.array(sct.grab(bounding_box))
         screen = cv2.cvtColor(screen, cv2.COLOR_RGB2GRAY)
@@ -40,17 +42,18 @@ while(True):
                              0, 0, 360, (125, 125, 125), -1)
 
         training_data.append([screen, keys])
-
         if len(training_data) % 1000 == 0:
             print(len(training_data))
             np.save(file_name, training_data)
 
-    '''
-        print('Frame took {} seconds'.format(time.time()-last_time))
-        last_time = time.time()
+    print('Frame took {} seconds'.format(time.time()-last_time))
+    last_time = time.time()
+
+'''
+
 
         cv2.imshow("screen", screen)
         if cv2.waitKey(16) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
             break
-    '''
+'''

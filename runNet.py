@@ -39,18 +39,27 @@ def main():
             screen = cv2.resize(screen, (200, 150))
             screen = cv2.ellipse(screen, (100, 100), (42, 28),
                                  0, 0, 360, (125, 125, 125), -1)
-            print('loop took {} seconds'.format(time.time() - last_time))
-            last_time = time.time()
+            # print('loop took {} seconds'.format(time.time() - last_time))
+            # last_time = time.time()
 
             prediction = model.predict([screen.reshape(200, 150, 1)])[0]
-            print(prediction)
+            # print(prediction)
 
-            turn_thresh = .01
+            turn_thresh = .55
 
-            if prediction[0] > turn_thresh:
+            if(prediction[0] > turn_thresh and prediction[0] > prediction[1] and prediction[0] > prediction[2]):
                 k.tap_key("a")
-            elif prediction[1] > turn_thresh:
+                k.tap_key("a")
+                k.tap_key("a")
+                print("Left!\t\t" + str(prediction[0]))
+            elif(prediction[1] > turn_thresh and prediction[1] > prediction[0] and prediction[1] > prediction[2]):
                 k.tap_key("d")
+                k.tap_key("d")
+                k.tap_key("d")
+                print("Right!\t\t" + str(prediction[1]))
+            else:
+                print("Straight!\t" + str(prediction[2]))
+                pass
 
 
 main()
