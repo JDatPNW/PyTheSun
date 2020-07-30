@@ -1,11 +1,13 @@
 import keyboard
-import pyautogui
-#import cv2
-import numpy as np
+from mss import mss
+import cv2
 import time
+import numpy as np
 
-size = (0, 28, 800, 628)  # This is where the game is located if I lock it top right
+bounding_box = {'top': 28, 'left': 0, 'width': 800, 'height': 600}
+
 last_time = time.time()
+sct = mss()
 
 for i in range(1000):
     keys = [0, 0, 0, 0]
@@ -20,12 +22,12 @@ for i in range(1000):
     if(keyboard.is_pressed('q')):
         break
 
-    screen = np.array(pyautogui.screenshot(region=size))
+    screen = np.array(sct.grab(bounding_box))
 
     print('Frame took {} seconds'.format(time.time()-last_time))
     last_time = time.time()
 
-    #cv2.imshow("screen", screen)
-    #if cv2.waitKey(20) & 0xFF == ord('q'):
-    #    break
-#cv2.destroyAllWindows()
+    cv2.imshow("screen", screen)
+    if cv2.waitKey(20) & 0xFF == ord('q'):
+        break
+cv2.destroyAllWindows()
