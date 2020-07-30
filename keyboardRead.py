@@ -17,6 +17,8 @@ for i in range(1000):
         keys[2] = 1
     if(keyboard.is_pressed('d')):
         keys[3] = 1
+    if(keyboard.is_pressed('q')):
+        break
 
     screen = np.array(pyautogui.screenshot(region=size))
 
