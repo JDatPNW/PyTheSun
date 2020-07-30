@@ -10,7 +10,7 @@ bounding_box = {'top': 28, 'left': 0, 'width': 800, 'height': 600}
 last_time = time.time()
 sct = mss()
 
-frame_skip = 5
+frame_skip = 100
 frame = 0
 
 file_name = 'training_data.npy'
