@@ -28,6 +28,6 @@ for i in range(1000):
     last_time = time.time()
 
     cv2.imshow("screen", screen)
-    if cv2.waitKey(20) & 0xFF == ord('q'):
+    if cv2.waitKey(5) & 0xFF == ord('q'):
+        cv2.destroyAllWindows()
         break
-cv2.destroyAllWindows()
