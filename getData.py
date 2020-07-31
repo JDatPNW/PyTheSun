@@ -42,11 +42,17 @@ while(True):
                              0, 0, 360, (125, 125, 125), -1)
 
         training_data.append([screen, keys])
+
+        if(keyboard.is_pressed('o') and len(training_data) > 50):
+            for i in range(50):
+                training_data.pop()
+                print("Popped")
+
         if len(training_data) % 1000 == 0:
             print(len(training_data))
             np.save(file_name, training_data)
 
-    print('Frame took {} seconds'.format(time.time()-last_time))
+    print('Frame took {} seconds'.format(time.time() - last_time))
     last_time = time.time()
 
 '''
