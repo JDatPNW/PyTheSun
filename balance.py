@@ -34,10 +34,27 @@ for data in train_data:
     else:
         forwards.append([img, straight])
 
+small = 0
+if(len(forwards) < len(rights) and len(forwards) < len(lefts)):
+    small = len(forwards)
+    print("small is forwards")
+elif(len(rights) < len(forwards) and len(rights) < len(lefts)):
+    small = len(rights)
+    print("small is rights")
+elif(len(lefts) < len(rights) and len(lefts) < len(forwards)):
+    small = len(lefts)
+    print("small is lefts")
 
-forwards = forwards[:len(lefts)][:len(rights)]
-lefts = lefts[:len(forwards)]
-rights = rights[:len(forwards)]
+forwards = forwards[:small]
+lefts = lefts[:small]
+rights = rights[:small]
+
+print("small: " + str(small))
+
+print("Forwards:" + str(len(forwards)))
+print("Right:" + str(len(rights)))
+print("Left:" + str(len(lefts)))
+
 
 final_data = forwards + lefts + rights
 shuffle(final_data)
