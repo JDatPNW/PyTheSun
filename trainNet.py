@@ -9,6 +9,7 @@ MODEL_NAME = 'PyTheSun-{}-{}-{}-epochs-data.model'.format(
 
 
 model = dmnet(WIDTH, HEIGHT, LR)
+# model.load(MODEL_NAME)
 
 hm_data = 22
 for i in range(EPOCHS):
