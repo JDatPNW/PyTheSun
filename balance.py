@@ -31,8 +31,10 @@ for data in train_data:
         forwards.append([img, choice])
     elif choice == [1, 1, 0]:
         print('no matches')
-    else:
+    elif choice == [0, 0, 0]:
         forwards.append([img, straight])
+    else:
+        print("no match")
 
 small = 0
 if(len(forwards) < len(rights) and len(forwards) < len(lefts)):
@@ -44,6 +46,10 @@ elif(len(rights) < len(forwards) and len(rights) < len(lefts)):
 elif(len(lefts) < len(rights) and len(lefts) < len(forwards)):
     small = len(lefts)
     print("small is lefts")
+
+print("Forwards:" + str(len(forwards)))
+print("Right:" + str(len(rights)))
+print("Left:" + str(len(lefts)))
 
 forwards = forwards[:small]
 lefts = lefts[:small]
