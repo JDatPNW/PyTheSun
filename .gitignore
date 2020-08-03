@@ -5,8 +5,9 @@ log
 checkpoint
 *.npy
 *.model.*
-commands
+./commands
 PyTheSun*
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

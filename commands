@@ -1,5 +1,0 @@
-sudo python3 getData.py
-
-conda activate tflearn
-python3 trainNet.py
-python3 runNet.py 
