@@ -16,7 +16,7 @@ train_data = np.load('training_data_balanced.npy', allow_pickle=True)
 
 data = int(len(train_data)/10)
 
-for i in range(EPOCHS):
+for epoch in range(EPOCHS):
 
     shuffle(train_data)
 
