@@ -6,8 +6,8 @@ WIDTH = 160
 HEIGHT = 90
 LR = 1e-3
 EPOCHS = 100
-MODEL_NAME = 'PyTheSun-dmnet.model'
-
+MODEL_NAME = 'PyTheSun-{}-{}-{}-epochs-data.model'.format(
+    LR, 'dmnet', EPOCHS)
 
 model = dmnet(WIDTH, HEIGHT, LR)
 model.load(MODEL_NAME)
