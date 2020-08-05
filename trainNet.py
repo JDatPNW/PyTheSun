@@ -1,31 +1,35 @@
 import numpy as np
 from dmnet import dmnet
-WIDTH = 200
-HEIGHT = 150
+from random import shuffle
+
+WIDTH = 160
+HEIGHT = 90
 LR = 1e-3
-EPOCHS = 10
-MODEL_NAME = 'PyTheSun-{}-{}-{}-epochs-data.model'.format(
-    LR, 'dmnet', EPOCHS)
+EPOCHS = 100
+MODEL_NAME = 'PyTheSun-dmnet.model'
 
 
 model = dmnet(WIDTH, HEIGHT, LR)
-# model.load(MODEL_NAME)
+model.load(MODEL_NAME)
 
-hm_data = 22
+train_data = np.load('training_data_balanced.npy', allow_pickle=True)
+
+data = int(len(train_data)/10)
+
 for i in range(EPOCHS):
-    for i in range(1, hm_data + 1):
-        train_data = np.load('training_data_balanced.npy'.format(i), allow_pickle=True)
 
-        train = train_data[:-100]
-        test = train_data[-100:]
+    shuffle(train_data)
 
-        X = np.array([i[0] for i in train]).reshape(-1, WIDTH, HEIGHT, 1)
-        Y = [i[1] for i in train]
+    train = train_data[:-data]
+    test = train_data[-data:]
 
-        test_x = np.array([i[0] for i in test]).reshape(-1, WIDTH, HEIGHT, 1)
-        test_y = [i[1] for i in test]
+    X = np.array([i[0] for i in train]).reshape(-1, WIDTH, HEIGHT, 1)
+    Y = [i[1] for i in train]
 
-        model.fit({'input': X}, {'targets': Y}, n_epoch=1, validation_set=({'input': test_x}, {'targets': test_y}),
-                  snapshot_step=500, show_metric=True, run_id=MODEL_NAME)
+    test_x = np.array([i[0] for i in test]).reshape(-1, WIDTH, HEIGHT, 1)
+    test_y = [i[1] for i in test]
 
-        model.save(MODEL_NAME)
+    model.fit({'input': X}, {'targets': Y}, n_epoch=1, validation_set=({'input': test_x}, {'targets': test_y}),
+              snapshot_step=500, show_metric=True, run_id=MODEL_NAME)
+
+    model.save(MODEL_NAME)
